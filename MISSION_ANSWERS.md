@@ -234,3 +234,7 @@ Fix được hết bug vui quá đến khóc luôn!!!
 =======================================================
 ```
 ![part_6_lab_12](part_6_lab_12.png)
+
+https://railway.com/project/8c4af46e-ea5b-4f97-893a-ca3f14d0cf91/service/581175d3-a1a1-453c-861e-9c638ccf75ca?id=6daa6b5e-cfab-47c7-a888-b2e44207c934&
+
+![part_6_2_lab_12](part_6_2_lab_12.png)
