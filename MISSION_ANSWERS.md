@@ -12,10 +12,12 @@
 ### Exercise 1.2: Run basic version
 
 ### Exercise 1.3: Comparison table
-| Feature | Develop | Production | Why Important? |
-|---------|---------|------------|----------------|
-| Config  | ...     | ...        | ...            |
-...
+| Feature | Basic | Advanced | Tại sao quan trọng? |
+|---------|-------|----------|---------------------|
+| Config | Hardcode | Env vars | Nếu hardcode thì key bị lộ |
+| Health check | Không | Có | Nếu agent crashes, platform không biết để restart |
+| Logging | print() | JSON | Log hẳn hoi sau còn xem lại để debug |
+| Shutdown | Đột ngột | Graceful | ... |
 
 ## Part 2: Docker
 
