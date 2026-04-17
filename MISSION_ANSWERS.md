@@ -189,3 +189,48 @@ Total messages: 10
 ```
 
 Cuối cùng cũng xong part 5. Ai ra đề đánh đố vậy, bug ngay từ code trong đề bài, thì người mới học họ đọc sao hiểu?
+
+### Part 6:
+Fix được hết bug vui quá đến khóc luôn!!!
+
+```
+@quanglong2100 ➜ /workspaces/day12_ha-tang-cloud_va_deployment/06-lab-complete (main) $ python check_production_ready.py
+
+=======================================================
+  Production Readiness Check — Day 12 Lab
+=======================================================
+
+📁 Required Files
+  ✅ Dockerfile exists
+  ✅ docker-compose.yml exists
+  ✅ .dockerignore exists
+  ✅ .env.example exists
+  ✅ requirements.txt exists
+  ✅ railway.toml or render.yaml exists
+
+🔒 Security
+  ✅ .env in .gitignore
+  ✅ No hardcoded secrets in code
+
+🌐 API Endpoints (code check)
+  ✅ /health endpoint defined
+  ✅ /ready endpoint defined
+  ✅ Authentication implemented
+  ✅ Rate limiting implemented
+  ✅ Graceful shutdown (SIGTERM)
+  ✅ Structured logging (JSON)
+
+🐳 Docker
+  ✅ Multi-stage build
+  ✅ Non-root user
+  ✅ HEALTHCHECK instruction
+  ✅ Slim base image
+  ✅ .dockerignore covers .env
+  ✅ .dockerignore covers __pycache__
+
+=======================================================
+  Result: 20/20 checks passed (100%)
+  🎉 PRODUCTION READY! Deploy nào!
+=======================================================
+```
+![part_6_lab_12](part_6_lab_12.png)
