@@ -41,7 +41,7 @@
 ## Part 4: API Security
 
 ### Exercise 4.1-4.3: Test results
-@quanglong2100 ➜ /workspaces/day12_ha-tang-cloud_va_deployment/04-api-gateway/production (main) $ python app.py
+```@quanglong2100 ➜ /workspaces/day12_ha-tang-cloud_va_deployment/04-api-gateway/production (main) $ python app.py
 === Demo credentials ===
   student / demo123  (10 req/min, $1/day budget)
   teacher / teach456 (100 req/min, $1/day budget)
@@ -103,10 +103,11 @@ done
 {"detail":{"error":"Rate limit exceeded","limit":10,"window_seconds":60,"retry_after_seconds":17}}
 {"detail":{"error":"Rate limit exceeded","limit":10,"window_seconds":60,"retry_after_seconds":17}}
 {"detail":{"error":"Rate limit exceeded","limit":10,"window_seconds":60,"retry_after_seconds":17}}
+```
 
 
 ### Exercise 4.4: Cost guard implementation
-import redis
+```import redis
 from datetime import datetime
 
 r = redis.Redis()
@@ -131,10 +132,11 @@ I'm implementing a monthly spending cap per user ($10/month) by
     return False
 4. Updating usage if allowed: r.incrbyfloat(key, estimated_cost)
 5. Setting expiration (~monthly reset): r.expire(key, 32 * 24 * 3600)
+```
 
 ## Part 5: Scaling & Reliability
 
-@quanglong2100 ➜ /workspaces/day12_ha-tang-cloud_va_deployment/05-scaling-reliability/production (main) $ python test_stateless.py
+```@quanglong2100 ➜ /workspaces/day12_ha-tang-cloud_va_deployment/05-scaling-reliability/production (main) $ python test_stateless.py
 ============================================================
 Stateless Scaling Demo
 ============================================================
@@ -180,6 +182,7 @@ Total messages: 10
   [assistant]: Tôi là AI agent được deploy lên cloud. Câu hỏi của bạn đã đư...
 
 ✅ Session history preserved across all instances via Redis!
-@quanglong2100 ➜ /workspaces/day12_ha-tang-cloud_va_deployment/05-scaling-reliability/production (main) $ 
+@quanglong2100 ➜ /workspaces/day12_ha-tang-cloud_va_deployment/05-scaling-reliability/production (main) $
+```
 
 Cuối cùng cũng xong part 5. Ai ra đề đánh đố vậy, bug ngay từ code trong đề bài, thì người mới học họ đọc sao hiểu?
