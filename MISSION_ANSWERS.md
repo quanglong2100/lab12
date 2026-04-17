@@ -134,5 +134,52 @@ I'm implementing a monthly spending cap per user ($10/month) by
 
 ## Part 5: Scaling & Reliability
 
-### Exercise 5.1-5.5: Implementation notes
-[Your explanations and test results]
+@quanglong2100 ➜ /workspaces/day12_ha-tang-cloud_va_deployment/05-scaling-reliability/production (main) $ python test_stateless.py
+============================================================
+Stateless Scaling Demo
+============================================================
+
+Session ID: 6a976359-c336-4731-905f-86c1f19dd971
+
+Request 1: [instance-d1f130]
+  Q: What is Docker?
+  A: Container là cách đóng gói app để chạy ở mọi nơi. Build once, run anywhere!...
+
+Request 2: [instance-5ead0f]
+  Q: Why do we need containers?
+  A: Tôi là AI agent được deploy lên cloud. Câu hỏi của bạn đã được nhận....
+
+Request 3: [instance-1e5bcf]
+  Q: What is Kubernetes?
+  A: Đây là câu trả lời từ AI agent (mock). Trong production, đây sẽ là response từ O...
+
+Request 4: [instance-d1f130]
+  Q: How does load balancing work?
+  A: Đây là câu trả lời từ AI agent (mock). Trong production, đây sẽ là response từ O...
+
+Request 5: [instance-5ead0f]
+  Q: What is Redis used for?
+  A: Tôi là AI agent được deploy lên cloud. Câu hỏi của bạn đã được nhận....
+
+------------------------------------------------------------
+Total requests: 5
+Instances used: {'instance-1e5bcf', 'instance-5ead0f', 'instance-d1f130'}
+✅ All requests served despite different instances!
+
+--- Conversation History ---
+Total messages: 10
+  [user]: What is Docker?...
+  [assistant]: Container là cách đóng gói app để chạy ở mọi nơi. Build once...
+  [user]: Why do we need containers?...
+  [assistant]: Tôi là AI agent được deploy lên cloud. Câu hỏi của bạn đã đư...
+  [user]: What is Kubernetes?...
+  [assistant]: Đây là câu trả lời từ AI agent (mock). Trong production, đây...
+  [user]: How does load balancing work?...
+  [assistant]: Đây là câu trả lời từ AI agent (mock). Trong production, đây...
+  [user]: What is Redis used for?...
+  [assistant]: Tôi là AI agent được deploy lên cloud. Câu hỏi của bạn đã đư...
+
+✅ Session history preserved across all instances via Redis!
+@quanglong2100 ➜ /workspaces/day12_ha-tang-cloud_va_deployment/05-scaling-reliability/production (main) $ 
+
+Cuối cùng cũng xong part 5. Ai ra đề đánh đố vậy, bug ngay từ code trong đề bài, thì người mới học họ đọc sao hiểu?
