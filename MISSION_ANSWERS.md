@@ -34,8 +34,8 @@
 ## Part 3: Cloud Deployment
 
 ### Exercise 3.1: Railway deployment
-- URL: https://your-app.railway.app
-- Screenshot: [Link to screenshot in repo]
+- URL: https://caring-comfort-production-636d.up.railway.app/
+- Screenshot: !(part 3-1 lab 12.png)
 
 ## Part 4: API Security
 
