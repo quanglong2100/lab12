@@ -35,7 +35,7 @@
 
 ### Exercise 3.1: Railway deployment
 - URL: https://caring-comfort-production-636d.up.railway.app/
-- Screenshot: !(part_3-1_lab_12.png)
+- Screenshot: ![Part 3.1 Lab 12](part_3-1_lab_12.png)
 
 ## Part 4: API Security
 
