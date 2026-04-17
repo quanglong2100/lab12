@@ -41,7 +41,8 @@
 ## Part 4: API Security
 
 ### Exercise 4.1-4.3: Test results
-```@quanglong2100 ➜ /workspaces/day12_ha-tang-cloud_va_deployment/04-api-gateway/production (main) $ python app.py
+```
+@quanglong2100 ➜ /workspaces/day12_ha-tang-cloud_va_deployment/04-api-gateway/production (main) $ python app.py
 === Demo credentials ===
   student / demo123  (10 req/min, $1/day budget)
   teacher / teach456 (100 req/min, $1/day budget)
@@ -107,7 +108,8 @@ done
 
 
 ### Exercise 4.4: Cost guard implementation
-```import redis
+```
+import redis
 from datetime import datetime
 
 r = redis.Redis()
@@ -136,7 +138,8 @@ I'm implementing a monthly spending cap per user ($10/month) by
 
 ## Part 5: Scaling & Reliability
 
-```@quanglong2100 ➜ /workspaces/day12_ha-tang-cloud_va_deployment/05-scaling-reliability/production (main) $ python test_stateless.py
+```
+@quanglong2100 ➜ /workspaces/day12_ha-tang-cloud_va_deployment/05-scaling-reliability/production (main) $ python test_stateless.py
 ============================================================
 Stateless Scaling Demo
 ============================================================
