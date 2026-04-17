@@ -41,37 +41,96 @@
 ## Part 4: API Security
 
 ### Exercise 4.1-4.3: Test results
-@quanglong2100 ➜ /workspaces/day12_ha-tang-cloud_va_deployment/04-api-gateway/develop (main) $ python app.py
-API Key: demo-key-change-in-production
-Test: curl -H 'X-API-Key: demo-key-change-in-production' http://localhost:8000/ask?question=hello
-INFO:     Will watch for changes in these directories: ['/workspaces/day12_ha-tang-cloud_va_deployment/04-api-gateway/develop']
-INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
-INFO:     Started reloader process [67574] using WatchFiles
-INFO:     Started server process [67576]
+@quanglong2100 ➜ /workspaces/day12_ha-tang-cloud_va_deployment/04-api-gateway/production (main) $ python app.py
+=== Demo credentials ===
+  student / demo123  (10 req/min, $1/day budget)
+  teacher / teach456 (100 req/min, $1/day budget)
+INFO:     Started server process [84833]
 INFO:     Waiting for application startup.
+INFO:__main__:Security layer initialized
 INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
 INFO:     171.255.122.249:0 - "GET / HTTP/1.1" 200 OK
+curl -X POST http://localhost:8000/token \
+  -H "Content-Type: application/json" \
+  -d '{"username":"student","password":"demo123"}'
+curl -X POST http://localhost:8000/ask \
+  -H "Authorization: Bearer <token>" \
+  -H "Content-Type: application/json" \
+  -d '{"question":"what is docker?"}'
+INFO:     127.0.0.1:43532 - "HEAD /health HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:55374 - "POST /token HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54646 - "POST /token HTTP/1.1" 200 OK
+
+@quanglong2100 ➜ /workspaces/day12_ha-tang-cloud_va_deployment/04-api-gateway/production (main) $ curl -X POST http://localhost:8000/token \
+  -H "Content-Type: application/json" \
+  -d '{"username":"student","password":"demo123"}'
+{"access_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzdHVkZW50Iiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NzY0MjI2NTIsImV4cCI6MTc3NjQyNjI1Mn0.CIgEq-LbMLZFEJz5zRETFd764Cv_cUIZ73xQHfQ861Q","token_type":"bearer","expires_in_minutes":60,"hint":"Include in header: Authorization: Bearer eyJhbGciOiJIUzI1NiIs..."}@
+@quanglong2100 ➜ /workspaces/day12_ha-tang-cloud_va_deployment/04-api-gateway/production (main) $ 
+
+@quanglong2100 ➜ /workspaces/day12_ha-tang-cloud_va_deployment/04-api-gateway/production (main) $ TOKEN="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzdHVkZW50Iiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NzY0MjI2NTIsImV4cCI6MTc3NjQyNjI1Mn0.CIgEq-LbMLZFEJz5zRETFd764Cv_cUIZ73xQHfQ861Q"
 curl http://localhost:8000/ask -X POST \
+  -H "Authorization: Bearer $TOKEN" \
   -H "Content-Type: application/json" \
-  -d '{"question": "Hello"}'
-INFO:     127.0.0.1:60560 - "POST /ask HTTP/1.1" 401 Unauthorized
-INFO:     127.0.0.1:44372 - "POST /ask HTTP/1.1" 403 Forbidden
-INFO:     127.0.0.1:42452 - "POST /ask HTTP/1.1" 422 Unprocessable Entity
-@quanglong2100 ➜ /workspaces/day12_ha-tang-cloud_va_deployment/04-api-gateway/develop (main) $ curl http://localhost:8000/ask -X POST \
-  -H "Content-Type: application/json" \
-  -d '{"question": "Hello"}'
-{"detail":"Missing API key. Include header: X-API-Key: <your-key>"}@quanglong2100 ➜ /workspaces/da@quanglong2100 ➜ /workspaces/day12_ha-tang-cloud_va_deployment/04-api-gateway/develop (main) $ curl http://localhost:8000/ask -X POST \
-  -H "X-API-Key: secret-key-123" \
-  -H "Content-Type: application/json" \
-  -d '{"question": "Hello"}'
-@quanglong2100 ➜ /workspaces/day12_ha-tang-cloud_va_deployment/04-api-gateway/develop (main) $ curl http://localhost:8000/ask -X POST \
-  -H "X-API-Key: demo-key-change-in-production" \
-  -H "Content-Type: application/json" \
-  -d '{"question": "Hello"}'
-{"detail":[{"type":"missing","loc":["query","question"],"msg":"Field required","input":null}]}@qua
+  -d '{"question": "Explain JWT"}'
+{"question":"Explain JWT","answer":"Tôi là AI agent được deploy lên cloud. Câu hỏi của bạn đã được nhận.","usage":{"requests_remaining":9,"budget_remaining_usd":1.9e-05}}@quanglong2100 ➜ /workspaces/day12_ha-tang-cloud_va_deployment/04-api-gateway/production (main) $  
+
+@quanglong2100 ➜ /workspac# Gọi liên tục 20 lầnd_va_deployment/04-api-gateway/production (main) $  
+for i in {1..20}; do
+  curl http://localhost:8000/ask -X POST \
+    -H "Authorization: Bearer $TOKEN" \
+    -H "Content-Type: application/json" \
+    -d '{"question": "Test '$i'"}'
+  echo ""
+done
+{"question":"Test 1","answer":"Agent đang hoạt động tốt! (mock response) Hỏi thêm câu hỏi đi nhé.","usage":{"requests_remaining":8,"budget_remaining_usd":3.5e-05}}
+{"question":"Test 2","answer":"Tôi là AI agent được deploy lên cloud. Câu hỏi của bạn đã được nhận.","usage":{"requests_remaining":7,"budget_remaining_usd":5.3e-05}}
+{"question":"Test 3","answer":"Agent đang hoạt động tốt! (mock response) Hỏi thêm câu hỏi đi nhé.","usage":{"requests_remaining":6,"budget_remaining_usd":7e-05}}
+{"question":"Test 4","answer":"Đây là câu trả lời từ AI agent (mock). Trong production, đây sẽ là response từ OpenAI/Anthropic.","usage":{"requests_remaining":5,"budget_remaining_usd":9.1e-05}}
+{"question":"Test 5","answer":"Đây là câu trả lời từ AI agent (mock). Trong production, đây sẽ là response từ OpenAI/Anthropic.","usage":{"requests_remaining":4,"budget_remaining_usd":0.000112}}
+{"question":"Test 6","answer":"Agent đang hoạt động tốt! (mock response) Hỏi thêm câu hỏi đi nhé.","usage":{"requests_remaining":3,"budget_remaining_usd":0.000128}}
+{"question":"Test 7","answer":"Tôi là AI agent được deploy lên cloud. Câu hỏi của bạn đã được nhận.","usage":{"requests_remaining":2,"budget_remaining_usd":0.000146}}
+{"question":"Test 8","answer":"Agent đang hoạt động tốt! (mock response) Hỏi thêm câu hỏi đi nhé.","usage":{"requests_remaining":1,"budget_remaining_usd":0.000163}}
+{"question":"Test 9","answer":"Agent đang hoạt động tốt! (mock response) Hỏi thêm câu hỏi đi nhé.","usage":{"requests_remaining":0,"budget_remaining_usd":0.000179}}
+{"detail":{"error":"Rate limit exceeded","limit":10,"window_seconds":60,"retry_after_seconds":17}}
+{"detail":{"error":"Rate limit exceeded","limit":10,"window_seconds":60,"retry_after_seconds":17}}
+{"detail":{"error":"Rate limit exceeded","limit":10,"window_seconds":60,"retry_after_seconds":17}}
+{"detail":{"error":"Rate limit exceeded","limit":10,"window_seconds":60,"retry_after_seconds":17}}
+{"detail":{"error":"Rate limit exceeded","limit":10,"window_seconds":60,"retry_after_seconds":17}}
+{"detail":{"error":"Rate limit exceeded","limit":10,"window_seconds":60,"retry_after_seconds":17}}
+{"detail":{"error":"Rate limit exceeded","limit":10,"window_seconds":60,"retry_after_seconds":17}}
+{"detail":{"error":"Rate limit exceeded","limit":10,"window_seconds":60,"retry_after_seconds":17}}
+{"detail":{"error":"Rate limit exceeded","limit":10,"window_seconds":60,"retry_after_seconds":17}}
+{"detail":{"error":"Rate limit exceeded","limit":10,"window_seconds":60,"retry_after_seconds":17}}
+{"detail":{"error":"Rate limit exceeded","limit":10,"window_seconds":60,"retry_after_seconds":17}}
+
 
 ### Exercise 4.4: Cost guard implementation
-[Explain your approach]
+import redis
+from datetime import datetime
+
+r = redis.Redis()
+
+def check_budget(user_id: str, estimated_cost: float) -> bool:
+    month_key = datetime.now().strftime("%Y-%m")
+    key = f"budget:{user_id}:{month_key}"
+    
+    current = float(r.get(key) or 0)
+    if current + estimated_cost > 10:
+        return False
+    
+    r.incrbyfloat(key, estimated_cost)
+    r.expire(key, 32 * 24 * 3600)  # 32 days
+    return True
+
+Explain my approach:
+I'm implementing a monthly spending cap per user ($10/month) by
+1. Keying usage per user + month: key = f"budget:{user_id}:{month_key}"
+2. Reading current usage from Redis: current = float(r.get(key) or 0)
+3. Checking limit before allowing spend: if current + estimated_cost > 10:
+    return False
+4. Updating usage if allowed: r.incrbyfloat(key, estimated_cost)
+5. Setting expiration (~monthly reset): r.expire(key, 32 * 24 * 3600)
 
 ## Part 5: Scaling & Reliability
 
