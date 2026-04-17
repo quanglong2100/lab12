@@ -27,9 +27,9 @@
 ...
 
 ### Exercise 2.3: Image size comparison
-- Develop: [X] MB
-- Production: [Y] MB
-- Difference: [Z]%
+- Develop: 1000 MB
+- Production: 200 MB
+- Difference: 80%
 
 ## Part 3: Cloud Deployment
 
